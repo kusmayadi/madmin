@@ -3,7 +3,9 @@
 // Default values
 $name 			= isset($name) ? $name : '';
 $description	= isset($description) ? $description : '';
-		
+
+echo '<div class="module_content">';
+
 echo form::open();
 		
 	// Name
@@ -24,5 +26,7 @@ echo form::open();
 	echo __('or').' '.html::anchor('role', __('Cancel'));
 		
 echo form::close();
+
+echo '</div>';
 		
 ?>

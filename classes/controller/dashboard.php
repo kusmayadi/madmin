@@ -6,7 +6,8 @@ class Controller_Dashboard extends Controller_Admin {
 	{
 		parent::before();
 		
-		$this->template->module_title = 'Dashboard';
+		$this->template->title			= 'Dashboard';
+		$this->template->module_title	= 'Dashboard';
 	}
 	
 	public function action_index()

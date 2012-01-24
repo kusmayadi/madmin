@@ -1,4 +1,5 @@
-<table class="tablesorter" cellspacing="0"> 
+	<table class="tablesorter" cellspacing="0"> 
+	
 		<thead> 
 			<tr> 
    				<th class="header"><input type="checkbox" /></th> 

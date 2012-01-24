@@ -2,9 +2,9 @@ $(document).ready(function(){
 	$(".tablesorter").tablesorter(); 
    	 
 	//When page loads...
-	$(".tab_content").hide(); //Hide all content
-	$("ul.tabs li:first").addClass("active").show(); //Activate first tab
-	$(".tab_content:first").show(); //Show first tab content
+	//$(".tab_content").hide(); //Hide all content
+	//$("ul.tabs li.active").addClass("active").show(); //Activate first tab
+	//$(".tab_content:first").show(); //Show first tab content
 
 	//On Click Event
 	$("ul.tabs li").click(function() {

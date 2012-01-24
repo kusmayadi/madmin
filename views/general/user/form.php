@@ -4,6 +4,8 @@
 $username = isset($username) ? $username : '';
 $name	= isset($name) ? $name : '';
 $email	= isset($email) ? $email : '';
+
+echo '<div class="module_content">';
 		
 echo form::open();
 		
@@ -53,5 +55,7 @@ echo form::open();
 	echo __('or').' '.html::anchor('user', __('Cancel'));
 		
 echo form::close();
+
+echo '</div>';
 		
 ?>
