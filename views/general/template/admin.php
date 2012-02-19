@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8"/>
 	<title><?php echo isset($module_action_title) ? $module_action_title . ' - ' : ''; echo isset($module_title) ? $module_title . ' - ' : ''; echo isset($title) ? $title : ''; ?></title>
-	<?php var_dump($css); ?>
+
 	<?php echo isset($css) ? $css : ''; ?>
 	<!--[if lt IE 9]>
 	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
@@ -95,7 +95,7 @@
 		
 		<footer>
 			<hr />
-			<p><strong>Copyright &copy; 2011 las cholas en jap&#243;n</strong></p>
+			<p><strong>Copyright &copy; <?php echo date('Y'); ?> <?php echo Kohana::$config->load('site.name'); ?></strong></p>
 			<p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
 		</footer>
 	</aside><!-- end of sidebar -->

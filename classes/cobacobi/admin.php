@@ -5,6 +5,8 @@ class Cobacobi_Admin extends Base {
 	protected $auth;
 	protected $user;
 	protected $session;
+	
+	public $template = 'general/template/admin';
 
 	public function before()
 	{
