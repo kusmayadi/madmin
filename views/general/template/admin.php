@@ -28,7 +28,7 @@
 	<section id="secondary_bar">
 		<div class="user">
 			<?php if (Auth::instance()->logged_in()): ?>
-			<p><?php /*echo $user->name ? $user->name : $user->username;*/ echo $user->username; ?></p>
+			<p><?php echo $user->name ? $user->name : $user->username; ?></p>
 			<?php echo html::anchor('logout', 'Logout', array('class' => 'logout_user', 'title' => 'Logout')); ?>
 			<?php endif; ?>
 		</div>
