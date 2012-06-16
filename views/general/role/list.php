@@ -1,7 +1,7 @@
 <table class="tablesorter" cellspacing="0"> 
 		<thead> 
 			<tr> 
-   				<th class="header"></th> 
+   				<th class="header" width="1"></th> 
     			<th class="header"><?php echo __('Role'); ?></th>
     			<th class="header"><?php echo __('Description'); ?></th>
 				<th class="header"><?php echo __('Actions'); ?></th> 

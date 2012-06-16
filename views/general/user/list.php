@@ -2,7 +2,7 @@
 	
 		<thead> 
 			<tr> 
-   				<th class="header"><input type="checkbox" /></th> 
+   				<th class="header" width="1"><input type="checkbox" /></th> 
     			<th class="header">Username</th> 
 				<th class="header"><?php echo __('Name'); ?></th> 
 				<th class="header">Email</th> 

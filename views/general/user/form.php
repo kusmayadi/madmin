@@ -62,11 +62,9 @@ echo form::open();
 	}
 	echo '</div>';
 	echo '</fieldset>';
-		
-	echo '<br/>';
 			
 	echo form::submit(NULL, ucfirst(strtolower($module_action_title)));
-	echo __('or').' '.html::anchor('user', __('Cancel'));
+	echo __(' or ').' '.html::anchor('user', __('Cancel'));
 		
 echo form::close();
 
