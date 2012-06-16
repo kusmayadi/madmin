@@ -25,11 +25,10 @@
 	
 	<footer>
 		<div class="submit_link_left">
-			<input type="submit" id="delete_btn" value="Delete selected users" />
-			<input type="submit" id="add_new_btn" value="Add new user" rel="<?php echo url::site('user/create'); ?>" />
+			<input type="submit" id="delete_btn" value="<?php echo __('Delete selected users'); ?>" />
+			<input type="submit" id="add_new_btn" value="<?php echo __('Add new user'); ?>" rel="<?php echo url::site('user/create'); ?>" />
 		</div>
 		
-		<div class="submit_link">
-			<?php echo $pagination->render(); ?>
-		</div>
+		<?php echo $pagination->render(); ?>
+		
 	</footer>

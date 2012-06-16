@@ -20,14 +20,14 @@
 
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><?php echo html::anchor('/', html::image('images/logo.png', array('width' => 250, 'alt' => 'las cholas en japon'))); ?></a></h1>
+			<h1 class="site_title"><?php echo html::anchor('/', Kohana::$config->load('site.name')); //echo html::anchor('/', html::image('images/logo.png', array('width' => 200, 'alt' => Kohana::$config->load('site.name')))); ?></h1>
 			<h2 class="section_title"><?php echo isset($module_title) ? $module_title : ''; ?></h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<?php if ($Auth->logged_in()): ?>
+			<?php if (Auth::instance()->logged_in()): ?>
 			<p><?php /*echo $user->name ? $user->name : $user->username;*/ echo $user->username; ?></p>
 			<?php echo html::anchor('logout', 'Logout', array('class' => 'logout_user', 'title' => 'Logout')); ?>
 			<?php endif; ?>
@@ -62,7 +62,7 @@
 	</section><!-- end of secondary bar -->
 	
 	<aside id="sidebar" class="column">
-		<?php if ($Auth->logged_in()): ?>
+		<?php if (Auth::instance()->logged_in()): ?>
 		
 			<form class="quick_search">
 				<input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
@@ -104,18 +104,33 @@
 		
 		<div class="clear"></div>
 		
+		<?php 
+		if (count($messages))
+		{
+			foreach ($messages as $message)
+			{
+				echo '<h4 class="alert_success">'.$message.'</h4>';
+			}
+		}
+		?>
+		
 		<article class="module width_full">
-			<header><h3 class="tabs_involved"><?php if (isset($module_action_title)) { echo $module_action_title; } elseif (isset($module_title)) { echo $module_title; } else { echo '&nbsp;'; } ?></h3></header>
-			
-			<?php if ( isset($content) AND ! strpos(trim($content), 'table')): ?>
-				<div class="module_content">
-			<?php endif; ?>
-			
-				<?php echo isset($content) ? $content : ''; ?>
-				
-			<?php if ( isset($content) AND ! strpos(trim($content), 'table')): ?>
-				</div>
-			<?php endif; ?>
+
+			<header>
+				<h3<?php echo isset($tabs) ? ' class="tabs_involved"' : ''; ?>><?php echo isset($module_action_title) ? $module_action_title : ''; ?></h3>
+				<?php if (isset($tabs)): ?>
+				<ul class="tabs">
+					<?php 
+					foreach ($tabs as $tab)
+					{
+						echo '<li class="'.$tab['state'].'">'.html::anchor($tab['url'], $tab['text']).'</li>';
+					}
+					?>
+				</ul>
+				<?php endif; ?>
+			</header>
+		
+			<?php echo isset($content) ? $content : ''; ?>
 			
 		</article>
 		

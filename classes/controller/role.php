@@ -11,17 +11,23 @@ class Controller_Role extends Controller_Admin {
 	
 	public function action_index()
 	{
+		$page = isset($_GET['p']) ? $_GET['p'] : 1;
+		
 		$this->template->module_action_title = 'Roles';
 		
-		$total_records = DB::select()->from('roles')->select('COUNT("*") AS total')->execute()->get('total');
+		$total = DB::select()->from('roles')->select('COUNT("*") AS total')->execute()->get('total');
 		
-		$pagination = $this->pagination($total_records);
+		$pagination = Pagination::factory($total, 40, $page);
 		
-		$roles = ORM::factory('role')->limit(Common::get_config('pagination.items_per_page'))->offset($pagination['pagination']->get_offset())->find_all();
+		$roles = ORM::factory('role')->limit($pagination->get_limit())->offset($pagination->get_offset())->find_all();
+		
+		$pagination_view = new View_Pagination_Extended;
+		$pagination_view->pagination = $pagination;
+		$pagination_view->request = Request::factory()->current();
 		
 		$this->template->content = View::factory('general/role/list')
 			->bind('roles', $roles)
-			->bind('pagination', $pagination['view']);
+			->bind('pagination', $pagination_view);
 			
 		$this->add_js('list.js');
 	}

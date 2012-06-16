@@ -26,7 +26,5 @@
 			<input type="submit" id="add_new_btn" value="<?php echo __('Add new role'); ?>" rel="<?php echo url::site('role/create'); ?>" />
 		</div>
 		
-		<div class="submit_link">
-			<?php echo $pagination->render(); ?>
-		</div>
+		<?php echo $pagination->render(); ?>
 	</footer>

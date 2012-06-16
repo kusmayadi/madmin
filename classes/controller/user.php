@@ -11,17 +11,24 @@ class Controller_User extends Controller_Admin {
 	
 	public function action_index()
 	{
+	
+		$page = isset($_GET['p']) ? $_GET['p'] : 1;
+	
 		$this->template->module_action_title = __('Users');
 		
-		$total_records = DB::select()->from('users')->select('COUNT("*") AS total')->execute()->get('total');
+		$total = DB::select(DB::expr('COUNT(*) AS total'))->from('users')->execute()->get('total');
+
+		$pagination = Pagination::factory($total, 40, $page);
 		
-		$pagination = $this->pagination($total_records);
+		$users = ORM::factory('user')->limit($pagination->get_limit())->offset($pagination->get_offset())->find_all();
 		
-		$users = ORM::factory('user')->limit(Common::get_config('pagination.items_per_page'))->offset($pagination['pagination']->get_offset())->find_all();
+		$pagination_view = new View_Pagination_Extended;
+		$pagination_view->pagination = $pagination;
+		$pagination_view->request = Request::factory()->current();
 		
 		$this->template->content = View::factory('general/user/list')
 			->bind('users', $users)
-			->bind('pagination', $pagination['view']);
+			->bind('pagination', $pagination_view);
 			
 		$this->add_js('list.js');
 	}

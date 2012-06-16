@@ -19,7 +19,7 @@ class Cobacobi_Admin extends Base {
 		
 		// Check if user already logged in
 		if ($this->request->controller() != 'login')
-		{
+		{	
 			if ($this->auth->logged_in())
 			{
 				$this->user				= $this->auth->get_user();
