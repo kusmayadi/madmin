@@ -12,13 +12,13 @@ class Controller_User extends Controller_Admin {
 	public function action_index()
 	{
 	
-		$page = isset($_GET['p']) ? $_GET['p'] : 1;
+		$page = isset($_GET['page']) ? $_GET['page'] : 1;
 	
 		$this->template->module_action_title = __('Users');
 		
 		$total = DB::select(DB::expr('COUNT(*) AS total'))->from('users')->execute()->get('total');
 
-		$pagination = Pagination::factory($total, 40, $page);
+		$pagination = Pagination::factory($total, 20, $page);
 		
 		$users = ORM::factory('user')->limit($pagination->get_limit())->offset($pagination->get_offset())->find_all();
 		
