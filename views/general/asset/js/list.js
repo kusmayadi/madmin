@@ -46,10 +46,27 @@ $(function(){
 			$('.chkId:checked').each(function(i, el){
 				ids.push($(el).val());
 			});
-
-			window.location.href = url + '?ids=' + ids;
+			
+			if (confirm('Are you sure you want to delete selected items?'))
+			{
+				window.location.href = url + '?ids=' + ids;
+			}
+			
 		}
 	
+	});
+	
+	$('.delete_link').click(function(e){
+		
+		if (confirm('Are you sure you wanto to delete selected item?'))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		
 	});
 
 });
