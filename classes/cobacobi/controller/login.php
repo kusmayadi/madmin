@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Cobacobi_Login extends Controller_Admin {
+class Cobacobi_Controller_Login extends Controller_Admin {
 
 	public function before()
 	{
