@@ -12,7 +12,7 @@ class Controller_Dashboard extends Controller_Admin {
 	
 	public function action_index()
 	{
-		$this->template->content = number_format(round(8.40, 2), 2);
+		
 	}
 
 }
