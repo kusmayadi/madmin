@@ -50,7 +50,6 @@ class Cobacobi_Controller_User extends Controller_Admin {
 		
 		if ($this->request->method() == 'POST')
 		{
-			var_dump($_POST);
 			$user = ORM::factory('user');
 
 			try 
