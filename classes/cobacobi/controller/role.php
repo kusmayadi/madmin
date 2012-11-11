@@ -25,7 +25,7 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 		$pagination_view->pagination = $pagination;
 		$pagination_view->request = Request::factory()->current();
 		
-		$this->template->content = View::factory('general/role/list')
+		$this->template->content = View::factory('role/list')
 			->bind('roles', $roles)
 			->bind('pagination', $pagination_view);
 			
@@ -64,7 +64,7 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 			
 		}
 		
-		$this->template->content = $this->display_form('general/role/form', $post_data, $vars);
+		$this->template->content = $this->display_form('role/form', $post_data, $vars);
 		
 	}
 	
@@ -104,7 +104,7 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 			$post_data = ORM::factory('role', $role_id)->as_array();
 		}
 		
-		$this->template->content = $this->display_form('general/role/form', $post_data, $vars);
+		$this->template->content = $this->display_form('role/form', $post_data, $vars);
 	}
 	
 	public function action_delete()

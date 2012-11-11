@@ -26,7 +26,7 @@ class Cobacobi_Controller_User extends Controller_Admin {
 		$pagination_view->pagination = $pagination;
 		$pagination_view->request = Request::factory()->current();
 		
-		$this->template->content = View::factory('general/user/list')
+		$this->template->content = View::factory('user/list')
 			->bind('users', $users)
 			->bind('pagination', $pagination_view);
 			
@@ -67,7 +67,7 @@ class Cobacobi_Controller_User extends Controller_Admin {
 			
 		}
 		
-		$this->template->content = $this->display_form('general/user/form', $post_data, $vars);
+		$this->template->content = $this->display_form('user/form', $post_data, $vars);
 		
 	}
 	
@@ -107,7 +107,7 @@ class Cobacobi_Controller_User extends Controller_Admin {
 			$post_data = $user->as_array();
 		}
 		
-		$this->template->content = $this->display_form('general/user/form', $post_data, $vars);
+		$this->template->content = $this->display_form('user/form', $post_data, $vars);
 	}
 	
 	public function action_delete()
