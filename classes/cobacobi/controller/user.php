@@ -105,6 +105,15 @@ class Cobacobi_Controller_User extends Controller_Admin {
 		else
 		{
 			$post_data = $user->as_array();
+			
+			$user_roles = array();
+			
+			foreach ($user->roles->find_all() as $user_role)
+			{
+				$user_roles[] = $user_role->id;
+			}
+			
+			$post_data['role'] = implode(', ', $user_roles);
 		}
 		
 		$this->template->content = $this->display_form('user/form', $post_data, $vars);
