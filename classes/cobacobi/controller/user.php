@@ -50,7 +50,7 @@ class Cobacobi_Controller_User extends Controller_Admin {
 		
 		if ($this->request->method() == 'POST')
 		{
-			
+			var_dump($_POST);
 			$user = ORM::factory('user');
 
 			try 
@@ -113,7 +113,7 @@ class Cobacobi_Controller_User extends Controller_Admin {
 				$user_roles[] = $user_role->id;
 			}
 			
-			$post_data['role'] = implode(', ', $user_roles);
+			$post_data['role'] = $user_roles;
 		}
 		
 		$this->template->content = $this->display_form('user/form', $post_data, $vars);
