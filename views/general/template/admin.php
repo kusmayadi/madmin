@@ -1,15 +1,11 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
 	<meta charset="utf-8"/>
 	<title><?php echo isset($module_action_title) ? $module_action_title . ' - ' : ''; echo isset($module_title) ? $module_title . ' - ' : ''; echo isset($title) ? $title : ''; ?></title>
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php echo isset($css) ? $css : ''; ?>
-	<!--[if lt IE 9]>
-	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
 	
 	<?php echo isset($js) ? $js : ''; ?>
 
@@ -18,125 +14,97 @@
 
 <body>
 
-	<header id="header">
-		<hgroup>
-			<h1 class="site_title"><?php echo html::anchor('/', Kohana::$config->load('site.name')); //echo html::anchor('/', html::image('images/logo.png', array('width' => 200, 'alt' => Kohana::$config->load('site.name')))); ?></h1>
-			<h2 class="section_title"><?php echo isset($module_title) ? $module_title : ''; ?></h2>
-		</hgroup>
-	</header> <!-- end of header bar -->
-	
-	<section id="secondary_bar">
-		<div class="user">
-			<?php if (Auth::instance()->logged_in()): ?>
-			<p><?php echo $user->name ? $user->name : $user->username; ?></p>
-			<?php echo html::anchor('logout', 'Logout', array('class' => 'logout_user', 'title' => 'Logout')); ?>
-			<?php endif; ?>
-		</div>
-		<div class="breadcrumbs_container">
-			<?php if (isset($breadcrumbs)): ?>
-			<article class="breadcrumbs">
-				<?php 
-				$i = 1;
-				foreach ($breadcrumbs as $url => $text)
-				{
-					if ($url == 'current')
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<?php echo html::anchor('/', Kohana::$config->load('site.name'), array('class' => 'brand')); ?>
+				
+				<?php if (Auth::instance()->logged_in()): ?>
+				<ul class="nav">
+					<?php 
+					// Custom menu
+					foreach ($menus as $menu)
 					{
-						echo '<a class="current">'.$text.'</a>';
-					}
-					else
-					{
-						echo html::anchor($url, $text);
+						echo '<li class="dropdown">';
+							echo html::anchor($menu['url'], $menu['label'].' <span class="caret"></span>', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'data-target' => 'dropdown'));
+							
+							if (count($menu['sub']))
+							{
+								echo '<ul class="dropdown-menu">';
+									foreach ($menu['sub'] as $submenu)
+									{
+										echo '<li>'.html::anchor($submenu['url'], $submenu['label']).'</li>';
+									}
+								echo '</ul>';
+							}
+							
+						echo '</li>';
 					}
 					
-					if (count($breadcrumbs) > $i)
+					// Admin menu
+					foreach ($admin_menus as $menu)
 					{
-						echo '<div class="breadcrumb_divider"></div> ';
+						echo '<li class="dropdown">';
+							echo html::anchor($menu['url'], $menu['label'].' <span class="caret"></span>', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'data-target' => 'dropdown'));
+							
+							if (count($menu['sub']))
+							{
+								echo '<ul class="dropdown-menu">';
+									foreach ($menu['sub'] as $submenu)
+									{
+										echo '<li>'.html::anchor($submenu['url'], $submenu['label']).'</li>';
+									}
+								echo '</ul>';
+							}
+							
+						echo '</li>';
 					}
-					
-					$i++;
-				}
-				?>
-			</article>
-			<?php endif; ?>
-		</div>
-	</section><!-- end of secondary bar -->
-	
-	<aside id="sidebar" class="column">
-		<?php if (Auth::instance()->logged_in()): ?>
-		
-			<form class="quick_search">
-				<input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
-			</form>
-			<hr/>
-		
-			<?php
-			foreach ($menus as $section => $menulist)
-			{
-				echo '<h3>'.$section.'</h3>';
+					?>
+				</ul>
+				
+				<ul class="nav pull-right">
+					<li class="dropdown">
+						<?php
+						$user_name = empty(Auth::instance()->get_user()->name) ? Auth::instance()->get_user()->username : Auth::instance()->get_user()->name;
+						
+						echo html::anchor('profile', $user_name.' <span class="caret"></span>', array('class' => 'dropdown', 'data-toggle' => 'dropdown', 'data-target' => 'dropdown'));
+						
+						echo '<ul class="dropdown-menu">';
 
-				echo '<ul class="toggle">';
-			
-				foreach ($menulist as $menu)
-				{
-					echo '<li class="'.$menu['icon'].'">'.html::anchor($menu['url'], $menu['text']).'</li>';
-				}
-			
-				echo '</ul>';
-			}
-			?>
-		
-		<?php else: ?>
-		
-			<div style="font-size: 14px;line-height: 20px;">
-				<p><?php echo isset($guide_text) ? $guide_text : ''; ?></p>
+						foreach ($profile_menus as $menu)
+						{
+							echo '<li>'.html::anchor($menu['url'], $menu['label']).'</li>';
+						}
+						?>
+					</li>
+				</ul>
+				<?php endif; ?>
 			</div>
-		
-		<?php endif; ?>
-		
-		<footer>
-			<hr />
-			<p><strong>Copyright &copy; <?php echo date('Y'); ?> <?php echo Kohana::$config->load('site.name'); ?></strong></p>
-			<p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
-		</footer>
-	</aside><!-- end of sidebar -->
+		</div>
+	</div>
 	
-	<section id="main" class="column">
-		
-		<div class="clear"></div>
-		
+	<div class="container-fluid">
+	
 		<?php 
 		if (count($messages))
 		{
 			foreach ($messages as $message)
 			{
-				echo '<h4 class="alert_success">'.$message.'</h4>';
+				echo '<div class="alert alert-success">'.$message.'</div>';
 			}
 		}
 		?>
 		
-		<article class="module width_full">
-
-			<header>
-				<h3<?php echo isset($tabs) ? ' class="tabs_involved"' : ''; ?>><?php echo isset($module_action_title) ? $module_action_title : ''; ?></h3>
-				<?php if (isset($tabs)): ?>
-				<ul class="tabs">
-					<?php 
-					foreach ($tabs as $tab)
-					{
-						echo '<li class="'.$tab['state'].'">'.html::anchor($tab['url'], $tab['text']).'</li>';
-					}
-					?>
-				</ul>
-				<?php endif; ?>
-			</header>
-		
-			<?php echo isset($content) ? $content : ''; ?>
-			
-		</article>
-		
-		<div class="spacer"></div>
-	</section>
-
+		<?php echo isset($content) ? $content : ''; ?>
+	
+	</div>
+	
+	<footer>
+		<div class="container-fluid">
+			<hr>
+			<p>Copyright &copy; <?php echo date('Y'); ?> <?php echo Kohana::$config->load('site.name'); ?></p>
+		</div>
+	</footer>
 
 </body>
 

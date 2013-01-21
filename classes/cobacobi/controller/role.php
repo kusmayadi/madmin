@@ -17,17 +17,13 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 		
 		$total = DB::select()->from('roles')->select('COUNT("*") AS total')->execute()->get('total');
 		
-		$pagination = Pagination::factory($total, 20, $page);
+		$pagination = Pagination::factory($total, 20);
 		
 		$roles = ORM::factory('role')->limit($pagination->get_limit())->offset($pagination->get_offset())->find_all();
 		
-		$pagination_view = new View_Pagination_Extended;
-		$pagination_view->pagination = $pagination;
-		$pagination_view->request = Request::factory()->current();
-		
 		$this->template->content = View::factory('role/list')
-			->bind('roles', $roles)
-			->bind('pagination', $pagination_view);
+			->set('roles', $roles)
+			->set('pagination', View::factory('template/pagination')->set('pagination', $pagination));
 			
 		$this->add_js('list.js');
 	}

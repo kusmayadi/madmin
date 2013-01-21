@@ -18,17 +18,13 @@ class Cobacobi_Controller_User extends Controller_Admin {
 		
 		$total = DB::select(DB::expr('COUNT(*) AS total'))->from('users')->execute()->get('total');
 
-		$pagination = Pagination::factory($total, 20, $page);
+		$pagination = Pagination::factory($total, 20);
 		
 		$users = ORM::factory('user')->limit($pagination->get_limit())->offset($pagination->get_offset())->find_all();
 		
-		$pagination_view = new View_Pagination_Extended;
-		$pagination_view->pagination = $pagination;
-		$pagination_view->request = Request::factory()->current();
-		
 		$this->template->content = View::factory('user/list')
-			->bind('users', $users)
-			->bind('pagination', $pagination_view);
+			->set('users', $users)
+			->set('pagination', View::factory('template/pagination')->set('pagination', $pagination));
 			
 		$this->add_js('list.js');
 	}

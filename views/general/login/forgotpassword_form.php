@@ -1,23 +1,23 @@
-<div class="module_content">
-	
-	<?php
-		echo Auth::instance()->hash_password('rocknroll');
-	// Default values
-	$email = isset($email) ? $email : '';
-		
-	echo form::open('login/forgotpassword');
-	
-	echo '<fieldset>';
-		echo form::label(__('Email Address'));
-		echo form::input('email', $email);
-		if (isset($errors['email']))
-			echo '<div class="error">'.$errors['email'].'</div>';
-	echo '</fieldset>';
+<?php
 
-		echo form::submit(NULL, __('Reset password'));
-		echo ' '.__('or').' '.html::anchor('login', __('Cancel'));
+// Default values
+$email = isset($email) ? $email : '';
 		
-		echo form::close();
-		?>
+echo form::open('login/forgotpassword', array('class' => 'form-horizontal'));
 	
-	</div>
+	echo '<div class="control-group">';
+		echo form::label('email', __('Email Address'), array('class' => 'control-label'));
+		echo '<div class="controls">';
+			echo form::input('email', $email);
+			
+			if (isset($errors['email']))
+				echo ' <small class="text-error">'.ucfirst($errors['email']).'</small>';
+		echo '</div>';
+	echo '</div>';
+
+	echo '<div class="controls">';
+		echo form::submit(NULL, __('Reset password'), array('class' => 'btn btn-primary'));
+		echo ' '.__('or').' '.html::anchor('login', __('Cancel'));
+	echo '</div>';
+		
+echo form::close();

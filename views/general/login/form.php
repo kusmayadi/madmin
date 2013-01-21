@@ -1,33 +1,28 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-echo '<div class="module_content">';
+// Default values
+$username = isset($username) ? $username : '';
 
-	// Default values
-	$username = isset($username) ? $username : '';
-		
-	echo form::open('login');
+echo '<div class="container">';
+
+echo form::open('login', array('class' => 'form-signin'));
+
+	echo '<h2 class="form-signin-heading">'.__('Please sign in').'</h2>';
 	
 	// Username
-	echo '<fieldset>';
-		echo form::label('username', 'Username');
-		echo form::input('username', $username, array('id' => 'username'));
-		if (isset($errors['username']))
-			echo '<div class="error">'.$errors['username'].'</div>';
-	echo '</fieldset>';
+	if (isset($errors['username']))
+		echo '<span class="label label-important">'.ucfirst($errors['username']).'</span>';
+	echo form::input('username', $username, array('id' => 'username', 'class' => 'input-block-level', 'placeholder' => __('Username')));
 	
 	// Password
-	echo '<fieldset>';
-	echo form::label('Password');
-	echo form::password('password');
 	if (isset($errors['password']))
-		echo '<div class="error">'.$errors['password'].'</div>';
-	echo '</fieldset>';
+		echo '<span class="label label-important">'.ucfirst($errors['password']).'</span>';
+	echo form::password('password', NULL, array('class' => 'input-block-level', 'placeholder' => __('Password')));
 	
-	echo form::submit(NULL, 'Login');
+	echo form::submit(NULL, 'Login', array('class' => 'btn btn-primary'));
 		
-	echo html::anchor('login/forgotpassword', __('Forgot Password').'?');
+	echo ' '.html::anchor('login/forgotpassword', __('Forgot Password').'?');
 		
-	echo form::close();
+echo form::close();
 	
 echo '</div>';
-	

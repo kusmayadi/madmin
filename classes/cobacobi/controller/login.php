@@ -57,6 +57,7 @@ class Cobacobi_Controller_Login extends Controller_Admin {
 			'current' => 'Login'
 		);
 		
+		$this->add_css('login.css');
 		$this->add_js('login.js');
 		$this->template->content = $this->display_form('login/form', $post_data, $additional_data);
 		

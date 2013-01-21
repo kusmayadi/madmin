@@ -1,30 +1,28 @@
-<table class="tablesorter" cellspacing="0"> 
-		<thead> 
-			<tr> 
-   				<th class="header" width="1"></th> 
-    			<th class="header"><?php echo __('Role'); ?></th>
-    			<th class="header"><?php echo __('Description'); ?></th>
-				<th class="header"><?php echo __('Actions'); ?></th> 
-			</tr> 
-		</thead> 
+<h1><?php echo __('Roles'); ?></h1>
+
+<table class="table table-bordered table-hover"> 
+	<thead> 
+		<tr> 
+   			<th class="header" width="1"></th> 
+    		<th class="header"><?php echo __('Role'); ?></th>
+    		<th class="header"><?php echo __('Description'); ?></th>
+			<th class="header"><?php echo __('Actions'); ?></th> 
+		</tr> 
+	</thead> 
 		
-		<tbody> 
-			<?php foreach($roles as $role): ?>
-			<tr> 
-				<td><input type="checkbox"></td> 
-				<td><?php echo html::anchor('role/update/'.$role->id, ucwords($role->name)); ?></td> 
-				<td><?php echo $role->description; ?></td> 
-				<td><?php echo html::anchor('role/update/'.$role->id, html::image('images/icn_edit.png', array('border' => 0, 'title' => 'Edit'))); echo ' &nbsp; '; echo html::anchor('role/delete/'.$role->id, html::image('images/icn_trash.png', array('border' => 0, 'title' => 'Trash'))) ?></td> 
-			</tr> 
-			<?php endforeach; ?>
-		</tbody> 
-	</table>
-	
-	<footer>
-		<div class="submit_link_left">
-			<input type="submit" id="delete_btn" value="<?php echo __('Delete selected roles'); ?>" />
-			<input type="submit" id="add_new_btn" value="<?php echo __('Add new role'); ?>" rel="<?php echo url::site('role/create'); ?>" />
-		</div>
-		
-		<?php echo $pagination->render(); ?>
-	</footer>
+	<tbody> 
+		<?php foreach($roles as $role): ?>
+		<tr> 
+			<td><input type="checkbox"></td> 
+			<td><?php echo html::anchor('role/update/'.$role->id, ucwords($role->name)); ?></td> 
+			<td><?php echo $role->description; ?></td> 
+			<td width="140"><?php echo html::anchor('role/update/'.$role->id, '<i class="icon-edit"></i> '.__('Edit'), array('class' => 'btn btn-mini')); echo ' &nbsp; '; echo html::anchor('role/delete/'.$role->id, '<i class="icon-trash"></i> '.__('Remove'), array('class' => 'btn btn-mini')) ?></td> 
+		</tr> 
+		<?php endforeach; ?>
+	</tbody> 
+</table>
+
+<button id="delete_btn" class="btn btn-danger"><?php echo __('Delete selected roles'); ?></button>
+<button id="add_new_btn" class="btn" rel="<?php echo url::site('role/create'); ?>"><?php echo __('Add new role'); ?></button>
+
+<?php echo $pagination; ?>
