@@ -33,9 +33,14 @@
 						}
 						echo '>';
 							
-							$caret = (isset($menu['sub']) AND count($menu['sub'])) ? ' <span class="caret"></span>' : '';
-							
-							echo html::anchor($menu['url'], $menu['label'].$caret, array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'data-target' => 'dropdown'));
+							if (isset($menu['sub']) AND count($menu['sub']))
+							{
+								echo html::anchor($menu['url'], $menu['label'].' <span class="caret"></span>', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'data-target' => 'dropdown'));
+							}
+							else
+							{
+								echo html::anchor($menu['url'], $menu['label']);
+							}
 							
 							if (isset($menu['sub']) AND count($menu['sub']))
 							{
