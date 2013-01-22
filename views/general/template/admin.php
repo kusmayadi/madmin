@@ -25,10 +25,19 @@
 					// Custom menu
 					foreach ($menus as $menu)
 					{
-						echo '<li class="dropdown">';
-							echo html::anchor($menu['url'], $menu['label'].' <span class="caret"></span>', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'data-target' => 'dropdown'));
+						echo '<li';
+						
+						if (isset($menu['sub']) AND count($menu['sub']))
+						{
+							echo ' class="dropdown"';
+						}
+						echo '>';
 							
-							if (count($menu['sub']))
+							$caret = (isset($menu['sub']) AND count($menu['sub'])) ? ' <span class="caret"></span>' : '';
+							
+							echo html::anchor($menu['url'], $menu['label'].$caret, array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'data-target' => 'dropdown'));
+							
+							if (isset($menu['sub']) AND count($menu['sub']))
 							{
 								echo '<ul class="dropdown-menu">';
 									foreach ($menu['sub'] as $submenu)
