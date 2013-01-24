@@ -18,7 +18,7 @@ class Cobacobi_Controller_User extends Controller_Admin {
 		
 		$total = DB::select(DB::expr('COUNT(*) AS total'))->from('users')->execute()->get('total');
 
-		$pagination = Pagination::factory($total, 20);
+		$pagination = Pagination::factory($total, Kohana::$config->load('pagination.total_per_page'));
 		
 		$users = ORM::factory('user')->limit($pagination->get_limit())->offset($pagination->get_offset())->find_all();
 		
