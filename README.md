@@ -6,5 +6,5 @@ madmin is admin module and it will be the foundation for the upcoming Kohana bas
 Dependencies
 ------------
 
-[nexeck kohana-pagination](https://github.com/nexeck/kohana-pagination).
-[mbase](https://github.com/kusmayadi/mbase.git)
+- [nexeck kohana-pagination](https://github.com/nexeck/kohana-pagination)
+- [mbase](https://github.com/kusmayadi/mbase.git)
