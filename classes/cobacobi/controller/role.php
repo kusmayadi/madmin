@@ -50,7 +50,7 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 			{
 				$role->create_role($_POST, array('name', 'description'));
 				
-				$this->request->redirect('role');
+				HTTP::redirect('role');
 			}
 			catch(ORM_Validation_Exception $e)
 			{
@@ -86,7 +86,7 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 			{
 				$role->update_role($_POST, array('name', 'description'));
 				
-				$this->request->redirect('role');
+				HTTP::redirect('role');
 			}
 			catch(ORM_Validation_Exception $e)
 			{

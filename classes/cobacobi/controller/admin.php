@@ -6,7 +6,7 @@ class Cobacobi_Controller_Admin extends Cobacobi_Controller_Template {
 	protected $user;
 	protected $session;
 	
-	public $template = 'general/template/admin';
+	public $template = 'template/admin';
 
 	public function before()
 	{
@@ -17,8 +17,9 @@ class Cobacobi_Controller_Admin extends Cobacobi_Controller_Template {
 
 		$this->template->auth = $this->auth;
 		
+		
 		// Check if user already logged in
-		if ($this->request->controller() != 'login')
+		if ($this->request->controller() != 'Login')
 		{	
 			if ($this->auth->logged_in())
 			{
@@ -28,7 +29,7 @@ class Cobacobi_Controller_Admin extends Cobacobi_Controller_Template {
 			else
 			{
 				$ref = urlencode($this->request->detect_uri().url::query($this->request->query()));
-				$this->request->redirect('login?ref='.$ref);
+				HTTP::redirect('login?ref='.$ref);
 			}
 			
 		}

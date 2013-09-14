@@ -38,7 +38,7 @@ class Cobacobi_Controller_Profile extends Controller_Admin {
 				$user->save();
 				
 				$this->add_message(__('Your profile has been saved.'));
-				$this->request->redirect('profile');
+				HTTP::redirect('profile');
 			}
 			else
 			{
@@ -90,7 +90,7 @@ class Cobacobi_Controller_Profile extends Controller_Admin {
 				$user->save();
 				
 				$this->add_message(__('Your password has been changed.'));
-				$this->request->redirect('profile');
+				HTTP::redirect('profile');
 			}
 			else
 			{

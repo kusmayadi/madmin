@@ -18,7 +18,7 @@ class Cobacobi_Controller_Login extends Controller_Admin {
 		// Redirect to dashboard if user already logged in
 		if ($this->auth->logged_in())
 		{
-			$this->request->redirect('dashboard');
+			HTTP::redirect('dashboard');
 		}
 		
 		$post_data = array();
@@ -34,7 +34,7 @@ class Cobacobi_Controller_Login extends Controller_Admin {
 			{
 				if ($this->auth->login($post['username'], $post['password']))
 				{
-					$this->request->redirect(Common::get_config('admin.default_logged_in_redirect'));
+					HTTP::redirect(Common::get_config('admin.default_logged_in_redirect'));
 				}
 				else
 				{
@@ -71,7 +71,7 @@ class Cobacobi_Controller_Login extends Controller_Admin {
 	{
 		Auth::instance()->logout();
 		
-		$this->request->redirect('login');
+		HTTP::redirect('login');
 	}
 	
 	public function action_forgotpassword()
@@ -79,7 +79,7 @@ class Cobacobi_Controller_Login extends Controller_Admin {
 	
 		if (Auth::instance()->logged_in())
 		{
-			$this->request->redirect('dashboard');
+			HTTP::redirect('dashboard');
 		}
 	
 		$this->template->module_title = __('Forgot Password');

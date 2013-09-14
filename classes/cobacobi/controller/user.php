@@ -52,7 +52,7 @@ class Cobacobi_Controller_User extends Controller_Admin {
 			{
 				$user->create_user($_POST, array('username', 'password', 'name', 'email'));
 				
-				$this->request->redirect('user');
+				HTTP::redirect('user');
 			}
 			catch(ORM_Validation_Exception $e)
 			{
@@ -89,7 +89,7 @@ class Cobacobi_Controller_User extends Controller_Admin {
 			{
 				$user->update_user($_POST, array('username', 'password', 'name', 'email'));
 				
-				$this->request->redirect('user');
+				HTTP::redirect('user');
 			}
 			catch(ORM_Validation_Exception $e)
 			{
