@@ -7,24 +7,34 @@ class Cobacobi_Controller_User extends Controller_Admin {
 		parent::before();
 		
 		$this->template->module_title = __('User');
+		
 	}
 	
 	public function action_index()
 	{
 	
-		$page = isset($_GET['page']) ? $_GET['page'] : 1;
-	
 		$this->template->module_action_title = __('Users');
 		
-		$total = DB::select(DB::expr('COUNT(*) AS total'))->from('users')->execute()->get('total');
-
-		$pagination = Pagination::factory($total, Kohana::$config->load('pagination.total_per_page'));
+		$page = $this->request->param('p') ? $this->request->param('p') : 1;
+		$perpage = $this->request->param('per_page') ? $this->request->param('per_page') : 20;
 		
-		$users = ORM::factory('user')->limit($pagination->get_limit())->offset($pagination->get_offset())->find_all();
+		$users = ORM::factory('user');
+		
+		$pagination = new Pagination(
+			$users, 
+			$page, 
+			'defaultlist', 
+			array(
+				'controller' => strtolower($this->request->controller())
+			), 
+			$perpage
+		);
+		
+		$pagination->route_page_param = 'p';
 		
 		$this->template->content = View::factory('user/list')
 			->set('users', $users)
-			->set('pagination', View::factory('template/pagination')->set('pagination', $pagination));
+			->set('pagination', $pagination);
 			
 		$this->add_js('list.js');
 	}

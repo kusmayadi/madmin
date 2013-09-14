@@ -11,7 +11,7 @@
 	</thead> 
 		
 	<tbody> 
-		<?php foreach($roles as $role): ?>
+		<?php foreach($pagination->result() as $role): ?>
 		<tr> 
 			<td><input type="checkbox"></td> 
 			<td><?php echo html::anchor('role/update/'.$role->id, ucwords($role->name)); ?></td> 
@@ -25,4 +25,4 @@
 <button id="delete_btn" class="btn btn-danger"><?php echo __('Delete selected roles'); ?></button>
 <button id="add_new_btn" class="btn" rel="<?php echo url::site('role/create'); ?>"><?php echo __('Add new role'); ?></button>
 
-<?php echo $pagination; ?>
+<?php echo $pagination->render(); ?>

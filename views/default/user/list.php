@@ -13,7 +13,7 @@
 	</thead> 
 		
 	<tbody> 
-		<?php foreach($users as $usr): ?>
+		<?php foreach($pagination->result() as $usr): ?>
 		<tr> 
 			<td><input type="checkbox" name="id" value="<?php echo $usr->id; ?>"></td> 
 			<td><?php echo html::anchor('user/update/'.$usr->id, $usr->username); ?></td> 
@@ -27,4 +27,5 @@
 
 <button id="delete_btn" class="btn btn-danger"><?php echo __('Delete selected users'); ?></button>
 <button id="add_new_btn" class="btn" rel="<?php echo url::site('user/create'); ?>"><?php echo __('Add new user'); ?></button>
-<?php echo $pagination; ?>
+
+<?php echo $pagination->render(); ?>

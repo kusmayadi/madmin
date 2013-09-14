@@ -7,4 +7,4 @@ Dependencies
 ------------
 
 - [mbase](https://github.com/kusmayadi/mbase.git)
-- [nexeck kohana-pagination](https://github.com/nexeck/kohana-pagination)
+- [colinbm kohana-pagination](https://github.com/colinbm/kohana-pagination)

@@ -11,19 +11,28 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 	
 	public function action_index()
 	{
-		$page = isset($_GET['page']) ? $_GET['page'] : 1;
-		
 		$this->template->module_action_title = 'Roles';
 		
-		$total = DB::select()->from('roles')->select('COUNT("*") AS total')->execute()->get('total');
+		$page = $this->request->param('p') ? $this->request->param('p') : 1;
+		$perpage = $this->request->param('per_page') ? $this->request->param('per_page') : 1;
 		
-		$pagination = Pagination::factory($total, 20);
+		$roles = ORM::factory('role');
 		
-		$roles = ORM::factory('role')->limit($pagination->get_limit())->offset($pagination->get_offset())->find_all();
+		$pagination = new Pagination(
+			$roles, 
+			$page, 
+			'defaultlist', 
+			array(
+				'controller' => strtolower($this->request->controller())
+			), 
+			$perpage
+		);
+		
+		$pagination->route_page_param = 'p';
 		
 		$this->template->content = View::factory('role/list')
 			->set('roles', $roles)
-			->set('pagination', View::factory('template/pagination')->set('pagination', $pagination));
+			->set('pagination', $pagination);
 			
 		$this->add_js('list.js');
 	}
