@@ -23,6 +23,8 @@ class Cobacobi_Controller_Login extends Controller_Admin {
 		
 		$post_data = array();
 		$additional_data = array();
+		if (! is_null($ref = $this->request->query('ref')));
+			$additional_data['ref'] = $ref;
 		
 		if ($this->request->method() == 'POST')
 		{
@@ -34,7 +36,10 @@ class Cobacobi_Controller_Login extends Controller_Admin {
 			{
 				if ($this->auth->login($post['username'], $post['password']))
 				{
-					HTTP::redirect(Common::get_config('admin.default_logged_in_redirect'));
+					if (is_null($redirect = $this->request->post('ref')))
+						$redirect = Common::get_config('admin.default_logged_in_redirect');
+
+					HTTP::redirect($redirect);
 				}
 				else
 				{

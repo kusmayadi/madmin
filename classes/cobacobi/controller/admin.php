@@ -28,8 +28,12 @@ class Cobacobi_Controller_Admin extends Cobacobi_Controller_Template {
 			}
 			else
 			{
-				$ref = urlencode($this->request->detect_uri().url::query($this->request->query()));
-				HTTP::redirect('login?ref='.$ref);
+				$ref = urlencode($this->request->uri().url::query($this->request->query()));
+
+				$redirect = 'login';
+				if ( ! is_null($ref) AND $ref != '')
+					$redirect .= '?ref='.$ref;
+				HTTP::redirect($redirect);
 			}
 			
 		}
