@@ -157,8 +157,25 @@ class Cobacobi_Controller_User extends Controller_Admin {
     
     public function action_delete()
     {
-    
-    
+        $ids = $this->request->query('ids');
+
+        if (! is_null($ids))
+        {
+            $users = ORM::factory('user')->where('id', 'in', DB::expr('('.$ids.')'))->find_all();
+            $roles = ORM::factory('role')->find_all();
+
+            foreach ($users as $user) {
+                // Remove relationship to model
+                foreach ($roles as $role) {
+                    if ($user->has('roles', $role))
+                        $user->remove('roles', $role);
+                }
+
+               $user->delete();
+            }
+        }
+
+        HTTP::redirect('user');
     }
 
 }
