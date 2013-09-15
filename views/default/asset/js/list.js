@@ -37,7 +37,8 @@ $(function(){
 	});
 	
 	$('#delete_btn').click(function(){
-	
+	console.log('clicked');
+	console.log($('.chkId:checked').length);
 		if ($('.chkId:checked').length)
 		{
 			url = $(this).attr('rel');
