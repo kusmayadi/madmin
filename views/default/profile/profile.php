@@ -34,9 +34,10 @@ echo Form::open(NULL, array('class' => 'form-horizontal'));
 	echo Form::label('password', __('Enter your password to update your profile'), array('class' => 'control-label'));
 	echo '<div class="controls">';
 		echo Form::password('password');
+		if (isset($errors['password']))
+			echo ' <small class="text-error">'.ucfirst($errors['password']).'</small>';
 	echo '</div>';
-	if (isset($errors['password']))
-		echo '<div class="error">'.$errors['password'].'</div>';
+	
 	echo '</div>';
 	
 	echo '<div class="controls">';

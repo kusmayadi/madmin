@@ -6,6 +6,9 @@ $madmin_validation = [
 	'old_password'	=> [
 		'Controller_Profile::checkpass'	=> 'invalid password'
 	],
+	'password'	=> [
+		'Controller_Profile::checkpass'	=> 'invalid password'
+	],
 
 ];
 
