@@ -13,6 +13,8 @@ echo Form::open(NULL, array('class' => 'form-horizontal'));
 	echo Form::label('name', __('Role Name'), array('class' => 'control-label'));
 	echo '<div class="controls">';
 		echo Form::input('name', $name);
+		if (isset($errors['name']))
+                echo ' <small class="text-error">'.ucfirst($errors['name']).'</small>';
 	echo '</div>';
 	if (isset($errors['name']))
 		echo '<div class="error">'.$errors['name'].'</div>';
@@ -21,6 +23,8 @@ echo Form::open(NULL, array('class' => 'form-horizontal'));
 	// Description
 	echo '<div class="control-group">';
 	echo Form::label('description', __('Description'), array('class' => 'control-label'));
+	if (isset($errors['description']))
+        echo ' <small class="text-error">'.ucfirst($errors['description']).'</small>';
 	echo '<div class="controls">';
 		echo Form::input('description', $description, array('maxlength' => 255));
 	echo '</div>';

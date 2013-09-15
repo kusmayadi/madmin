@@ -14,7 +14,7 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 		$this->template->module_action_title = 'Roles';
 		
 		$page = $this->request->param('p') ? $this->request->param('p') : 1;
-		$perpage = $this->request->param('per_page') ? $this->request->param('per_page') : 1;
+		$perpage = $this->request->param('per_page') ? $this->request->param('per_page') : 20;
 		
 		$roles = ORM::factory('role');
 		
@@ -57,7 +57,7 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 
 			try 
 			{
-				$role->create_role($_POST, array('name', 'description'));
+				$role->values($_POST, array('name', 'description'))->create();
 				
 				HTTP::redirect('role');
 			}
@@ -83,17 +83,15 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 		);
 		
 		$role_id = $this->request->param('id');
+		$role = ORM::factory('role', $role_id);
 		
 		$vars = array('module_action_title' => $this->template->module_action_title);
 		
 		if ($this->request->method() == 'POST')
 		{
-			
-			$role = ORM::factory('role');
-
 			try 
 			{
-				$role->update_role($_POST, array('name', 'description'));
+				$role->values($_POST, array('name', 'description'))->update();
 				
 				HTTP::redirect('role');
 			}
