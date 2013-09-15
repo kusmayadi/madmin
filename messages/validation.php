@@ -2,13 +2,13 @@
 
 $validation_messages = Kohana::message('validation');
 
-$madmin_validation = [
-	'old_password'	=> [
+$madmin_validation = array(
+	'old_password'	=> array(
 		'Controller_Profile::checkpass'	=> 'invalid password'
-	],
-	'password'	=> [
+	),
+	'password'	=> array(
 		'Controller_Profile::checkpass'	=> 'invalid password'
-	],
+	),
 
 ];
 

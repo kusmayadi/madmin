@@ -2,14 +2,14 @@
 
 $validation_messages = Kohana::message('validation');
 
-$madmin_user_validation = [
-    'username' => [
+$madmin_user_validation = array(
+    'username' => array(
         'unique' => 'Username is already exists'
-    ],
+    ),
 
-    'email' => [
+    'email' => array(
 		'unique' => 'Email is already exists'
-	]
+	)
 
 ];
 
