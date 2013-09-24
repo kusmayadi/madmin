@@ -98,7 +98,7 @@ class Cobacobi_Controller_Login extends Controller_Admin {
 				
 			if ($post->check())
 			{
-				$user = ORM::factory('user')->where('email', '=', $post['email'])->find();
+				$user = ORM::factory('User')->where('email', '=', $post['email'])->find();
 				
 				if($user->loaded())
 				{
