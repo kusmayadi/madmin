@@ -34,7 +34,7 @@ echo Form::open(NULL, array('class' => 'form-horizontal'));
 	
 	echo '<div class="controls">';
 		echo Form::submit(NULL, ucfirst(strtolower($module_action_title)), array('class' => 'btn btn-primary'));
-		echo __(' or ').' '.html::anchor('role', __('Cancel'));
+		echo __(' or ').' '.HTML::anchor('role', __('Cancel'));
 	echo '</div>';
 		
 echo Form::close();

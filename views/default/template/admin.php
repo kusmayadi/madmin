@@ -17,7 +17,7 @@
 	<div class="navbar">
 		<div class="navbar-inner">
 			<div class="container-fluid">
-				<?php echo html::anchor('/', Kohana::$config->load('site.name'), array('class' => 'brand')); ?>
+				<?php echo HTML::anchor('/', Kohana::$config->load('site.name'), array('class' => 'brand')); ?>
 				
 				<?php if (Auth::instance()->logged_in()): ?>
 				<ul class="nav">
@@ -35,11 +35,11 @@
 							
 							if (isset($menu['sub']) AND count($menu['sub']))
 							{
-								echo html::anchor($menu['url'], $menu['label'].' <span class="caret"></span>', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'data-target' => 'dropdown'));
+								echo HTML::anchor($menu['url'], $menu['label'].' <span class="caret"></span>', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'data-target' => 'dropdown'));
 							}
 							else
 							{
-								echo html::anchor($menu['url'], $menu['label']);
+								echo HTML::anchor($menu['url'], $menu['label']);
 							}
 							
 							if (isset($menu['sub']) AND count($menu['sub']))
@@ -47,7 +47,7 @@
 								echo '<ul class="dropdown-menu">';
 									foreach ($menu['sub'] as $submenu)
 									{
-										echo '<li>'.html::anchor($submenu['url'], $submenu['label']).'</li>';
+										echo '<li>'.HTML::anchor($submenu['url'], $submenu['label']).'</li>';
 									}
 								echo '</ul>';
 							}
@@ -59,14 +59,14 @@
 					foreach ($admin_menus as $menu)
 					{
 						echo '<li class="dropdown">';
-							echo html::anchor($menu['url'], $menu['label'].' <span class="caret"></span>', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'data-target' => 'dropdown'));
+							echo HTML::anchor($menu['url'], $menu['label'].' <span class="caret"></span>', array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown', 'data-target' => 'dropdown'));
 							
 							if (count($menu['sub']))
 							{
 								echo '<ul class="dropdown-menu">';
 									foreach ($menu['sub'] as $submenu)
 									{
-										echo '<li>'.html::anchor($submenu['url'], $submenu['label']).'</li>';
+										echo '<li>'.HTML::anchor($submenu['url'], $submenu['label']).'</li>';
 									}
 								echo '</ul>';
 							}
@@ -81,13 +81,13 @@
 						<?php
 						$user_name = empty(Auth::instance()->get_user()->name) ? Auth::instance()->get_user()->username : Auth::instance()->get_user()->name;
 						
-						echo html::anchor('profile', $user_name.' <span class="caret"></span>', array('class' => 'dropdown', 'data-toggle' => 'dropdown', 'data-target' => 'dropdown'));
+						echo HTML::anchor('profile', $user_name.' <span class="caret"></span>', array('class' => 'dropdown', 'data-toggle' => 'dropdown', 'data-target' => 'dropdown'));
 						
 						echo '<ul class="dropdown-menu">';
 
 						foreach ($profile_menus as $menu)
 						{
-							echo '<li>'.html::anchor($menu['url'], $menu['label']).'</li>';
+							echo '<li>'.HTML::anchor($menu['url'], $menu['label']).'</li>';
 						}
 						?>
 					</li>

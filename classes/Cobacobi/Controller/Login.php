@@ -115,7 +115,7 @@ class Cobacobi_Controller_Login extends Controller_Admin {
 					$msg .= "\n\n";
 					$msg .= __('Your new password is').': '.$new_password;
 					$msg .= "\n\n";
-					$msg .= __('You can login to CMS Cantiqa at').' '.url::site('login', $this->request);
+					$msg .= __('You can login to CMS Cantiqa at').' '.URL::site('login', $this->request);
 					$msg .= "\n\n";
 					$msg .= __('Thank you');
 					$msg .= "\n";
