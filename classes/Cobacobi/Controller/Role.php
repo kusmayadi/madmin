@@ -21,7 +21,7 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 		$pagination = new Pagination(
 			$roles, 
 			$page, 
-			'defaultlist', 
+			'default', 
 			array(
 				'controller' => strtolower($this->request->controller())
 			), 
