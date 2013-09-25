@@ -20,7 +20,7 @@ class Cobacobi_Controller_User extends Controller_Admin {
         
         $users = ORM::factory('User');
         
-        $pagination = new Pagination(
+        $pagination = Pagination::factory(
             $users, 
             $page, 
             'defaultlist', 
