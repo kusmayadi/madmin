@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Cobacobi_Controller_Admin extends Controller_Template {
+class Cobacobi_Controller_Admin extends Cobacobi_Controller_Template {
 
 	protected $auth;
 	protected $user;
