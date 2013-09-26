@@ -39,7 +39,7 @@ class Task_User_Generate extends Minion_Task
         if ( !isset($params['role']))
         	$params['role'] = 'user';
         
-        $user = ORM::factory('user');
+        $user = ORM::factory('User');
         $user->username = $params['username'];
         $user->password = $params['password'];
         $user->name     = $params['name'];
@@ -48,13 +48,13 @@ class Task_User_Generate extends Minion_Task
         $user->save();
         
         // Add login role
-        $role = ORM::factory('role')->where('name', '=', 'login')->find();
+        $role = ORM::factory('Role')->where('name', '=', 'login')->find();
         $user->add('roles', $role);
         
         // Add aditional role
         if ($params['role'] != 'user' AND $params['role'] != 'login')
         {
-        	$role = ORM::factory('role')->where('name', '=', $params['role'])->find();
+        	$role = ORM::factory('Role')->where('name', '=', $params['role'])->find();
         	$user->add('roles', $role);
         }
         

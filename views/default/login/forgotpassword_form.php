@@ -3,12 +3,12 @@
 // Default values
 $email = isset($email) ? $email : '';
 		
-echo form::open('login/forgotpassword', array('class' => 'form-horizontal'));
+echo Form::open('login/forgotpassword', array('class' => 'form-horizontal'));
 	
 	echo '<div class="control-group">';
-		echo form::label('email', __('Email Address'), array('class' => 'control-label'));
+		echo Form::label('email', __('Email Address'), array('class' => 'control-label'));
 		echo '<div class="controls">';
-			echo form::input('email', $email);
+			echo Form::input('email', $email);
 			
 			if (isset($errors['email']))
 				echo ' <small class="text-error">'.ucfirst($errors['email']).'</small>';
@@ -16,8 +16,8 @@ echo form::open('login/forgotpassword', array('class' => 'form-horizontal'));
 	echo '</div>';
 
 	echo '<div class="controls">';
-		echo form::submit(NULL, __('Reset password'), array('class' => 'btn btn-primary'));
-		echo ' '.__('or').' '.html::anchor('login', __('Cancel'));
+		echo Form::submit(NULL, __('Reset password'), array('class' => 'btn btn-primary'));
+		echo ' '.__('or').' '.HTML::anchor('login', __('Cancel'));
 	echo '</div>';
 		
-echo form::close();
+echo Form::close();

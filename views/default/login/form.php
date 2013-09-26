@@ -23,7 +23,7 @@ echo Form::open('login', array('class' => 'form-signin'));
 	
 	echo Form::submit(NULL, 'Login', array('class' => 'btn btn-primary'));
 		
-	echo ' '.html::anchor('login/forgotpassword', __('Forgot Password').'?');
+	echo ' '.HTML::anchor('login/forgotpassword', __('Forgot Password').'?');
 		
 echo Form::close();
 	

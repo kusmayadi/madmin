@@ -16,12 +16,12 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 		$page = $this->request->param('p') ? $this->request->param('p') : 1;
 		$perpage = $this->request->param('per_page') ? $this->request->param('per_page') : 20;
 		
-		$roles = ORM::factory('role');
+		$roles = ORM::factory('Role');
 		
 		$pagination = new Pagination(
 			$roles, 
 			$page, 
-			'defaultlist', 
+			'default', 
 			array(
 				'controller' => strtolower($this->request->controller())
 			), 
@@ -53,7 +53,7 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 		if ($this->request->method() == 'POST')
 		{
 			
-			$role = ORM::factory('role');
+			$role = ORM::factory('Role');
 
 			try 
 			{
@@ -83,7 +83,7 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 		);
 		
 		$role_id = $this->request->param('id');
-		$role = ORM::factory('role', $role_id);
+		$role = ORM::factory('Role', $role_id);
 		
 		$vars = array('module_action_title' => $this->template->module_action_title);
 		
@@ -104,7 +104,7 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 		}
 		else
 		{
-			$post_data = ORM::factory('role', $role_id)->as_array();
+			$post_data = ORM::factory('Role', $role_id)->as_array();
 		}
 		
 		$this->template->content = $this->display_form('role/form', $post_data, $vars);
@@ -116,8 +116,8 @@ class Cobacobi_Controller_Role extends Controller_Admin {
 
 		if (! is_null($ids))
 		{
-			$roles = ORM::factory('role')->where('id', 'in', DB::expr('('.$ids.')'))->find_all();
-			$users = ORM::factory('user')->find_all();
+			$roles = ORM::factory('Role')->where('id', 'in', DB::expr('('.$ids.')'))->find_all();
+			$users = ORM::factory('User')->find_all();
 
 			foreach ($roles as $role) {
 				// Remove relationship to user

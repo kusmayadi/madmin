@@ -11,6 +11,6 @@ $madmin_user_validation = array(
 		'unique' => 'Email is already exists'
 	)
 
-];
+);
 
 return array_merge($validation_messages, $madmin_user_validation);

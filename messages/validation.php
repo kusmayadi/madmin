@@ -10,6 +10,6 @@ $madmin_validation = array(
 		'Controller_Profile::checkpass'	=> 'invalid password'
 	),
 
-];
+);
 
 return array_merge($validation_messages, $madmin_validation);

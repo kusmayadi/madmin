@@ -32,7 +32,7 @@ class Cobacobi_Controller_Profile extends Controller_Admin {
 				
 				$postdata = $post->data();
 				
-				$user = ORM::factory('user', $this->user->id);
+				$user = ORM::factory('User', $this->user->id);
 				$user->name		= $postdata['name'];
 				$user->email	= $postdata['email'];
 				$user->save();
@@ -85,7 +85,7 @@ class Cobacobi_Controller_Profile extends Controller_Admin {
 			{
 				$postdata = $post->data();
 			
-				$user = ORM::factory('user', $this->user->id);
+				$user = ORM::factory('User', $this->user->id);
 				$user->password = $postdata['password'];
 				$user->save();
 				
