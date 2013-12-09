@@ -5,60 +5,60 @@ class Cobacobi_Controller_User extends Controller_Admin {
     public function before()
     {
         parent::before();
-        
+
         $this->template->module_title = __('User');
-        
+
     }
-    
+
     public function action_index()
     {
-    
+
         $this->template->module_action_title = __('Users');
-        
+
         $page = $this->request->param('p') ? $this->request->param('p') : 1;
         $perpage = $this->request->param('per_page') ? $this->request->param('per_page') : 20;
-        
-        $users = ORM::factory('user');
-        
+
+        $users = ORM::factory('User');
+
         $pagination = new Pagination(
-            $users, 
-            $page, 
-            'defaultlist', 
+            $users,
+            $page,
+            'defaultlist',
             array(
                 'controller' => strtolower($this->request->controller())
-            ), 
+            ),
             $perpage
         );
-        
+
         $pagination->route_page_param = 'p';
-        
+
         $this->template->content = View::factory('user/list')
             ->set('users', $users)
             ->set('pagination', $pagination);
-            
+
         $this->add_js('list.js');
     }
-    
+
     public function action_create()
     {
-    
+
         $this->template->module_action_title = __('Add New User');
-    
+
         $this->template->breadcrumbs = array(
             'user'  => __('Users'),
             'current' => $this->template->module_action_title
         );
-        
-        $roles = ORM::factory('role')->find_all();
-        
+
+        $roles = ORM::factory('Role')->find_all();
+
         $post_data = array();
         $vars = array('module_action_title' => $this->template->module_action_title, 'roles' => $roles);
-        
+
         if ($this->request->method() == 'POST')
         {
-            $user = ORM::factory('user');
+            $user = ORM::factory('User');
 
-            try 
+            try
             {
                 $user->create_user($this->request->post(), array('username', 'password', 'name', 'email'));
 
@@ -66,11 +66,11 @@ class Cobacobi_Controller_User extends Controller_Admin {
                 {
                     foreach ($this->request->post('role') as $submittedrole)
                     {
-                        $role = ORM::factory('role', $submittedrole);
+                        $role = ORM::factory('Role', $submittedrole);
                         $user->add('roles', $role->id);
                     }
                 }
-                
+
                 HTTP::redirect('user');
             }
             catch(ORM_Validation_Exception $e)
@@ -78,30 +78,30 @@ class Cobacobi_Controller_User extends Controller_Admin {
                 $post_data = $_POST;
                 $post_data['errors'] = $e->errors('validation');
             }
-            
+
         }
-        
+
         $this->template->content = $this->display_form('user/form', $post_data, $vars);
-        
+
     }
-    
+
     public function action_update()
     {
         $this->template->module_action_title = __('Update User');
-    
+
         $this->template->breadcrumbs = array(
             'user'  => __('Users'),
             'current' => $this->template->module_action_title
         );
-        
-        $roles = ORM::factory('role')->find_all();
-        
+
+        $roles = ORM::factory('Role')->find_all();
+
         $user_id = $this->request->param('id');
-        
-        $user = ORM::factory('user', $user_id);
-        
+
+        $user = ORM::factory('User', $user_id);
+
         $vars = array('module_action_title' => $this->template->module_action_title, 'roles' => $roles);
-        
+
         if ($this->request->method() == 'POST')
         {
             try
@@ -111,7 +111,7 @@ class Cobacobi_Controller_User extends Controller_Admin {
                 // Add role to user
 
                 // Remove existing role first
-                $roles = ORM::factory('role')->find_all();
+                $roles = ORM::factory('Role')->find_all();
 
                 foreach ($roles as $role)
                 {
@@ -123,13 +123,13 @@ class Cobacobi_Controller_User extends Controller_Admin {
                 {
                     foreach ($this->request->post('role') as $submittedrole)
                     {
-                        $role = ORM::factory('role', $submittedrole);
-                        
+                        $role = ORM::factory('Role', $submittedrole);
+
                         // Add role
                         $user->add('roles', $role);
                     }
                 }
-                
+
                 HTTP::redirect('user');
             }
             catch(ORM_Validation_Exception $e)
@@ -141,28 +141,28 @@ class Cobacobi_Controller_User extends Controller_Admin {
         else
         {
             $post_data = $user->as_array();
-            
+
             $user_roles = array();
-            
+
             foreach ($user->roles->find_all() as $user_role)
             {
                 $user_roles[] = $user_role->id;
             }
-            
+
             $post_data['role'] = $user_roles;
         }
-        
+
         $this->template->content = $this->display_form('user/form', $post_data, $vars);
     }
-    
+
     public function action_delete()
     {
         $ids = $this->request->query('ids');
 
         if (! is_null($ids))
         {
-            $users = ORM::factory('user')->where('id', 'in', DB::expr('('.$ids.')'))->find_all();
-            $roles = ORM::factory('role')->find_all();
+            $users = ORM::factory('User')->where('id', 'in', DB::expr('('.$ids.')'))->find_all();
+            $roles = ORM::factory('Role')->find_all();
 
             foreach ($users as $user) {
                 // Remove relationship to model
