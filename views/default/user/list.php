@@ -21,7 +21,7 @@
       <td><?php echo $usr->email; ?></td>
       <td width="140">
         <?php echo HTML::anchor('user/update/'.$usr->id, '<i class="icon-edit"></i> '.__('Edit'), array('class' => 'btn btn-mini')); ?>
-        <?php echo HTML::anchor('user/delete?ids='.$usr->id, '<i class="icon-trash"></i> '.__('Remove'), array('class' => 'btn btn-mini delete_link')); ?>
+        <?php echo Auth::instance()->get_user()->username == $usr->username ? '' : HTML::anchor('user/delete?ids='.$usr->id, '<i class="icon-trash"></i> '.__('Remove'), array('class' => 'btn btn-mini delete_link')); ?>
       </td>
     </tr>
     <?php endforeach; ?>
